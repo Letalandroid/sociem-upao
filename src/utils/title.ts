@@ -1,1 +1,0 @@
-export const title = 'CPC - CPPC SOCIEM UPAO PIURA'
