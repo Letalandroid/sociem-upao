@@ -18,18 +18,18 @@ const courses = await getCollection("courses");
         const { title, img } = data;
 
         return (
-          <div class="my-3 flex flex-col sm:flex-row items-center gap-3">
+          <a href={`/course/${slug}`} class="!no-underline not-last:my-3 flex flex-col sm:flex-row items-center gap-3">
             <img
               transition:name={`img-${slug}`}
               class="w-full sm:w-52 rounded"
               src={img}
               alt={`Curso ${slug.replace("-", " ")}`}
             />
-            <a href={`/course/${slug}`} class="text-black !no-underline">
+            <div class="text-black">
               <h4 class="!font-bold underline">{title}</h4>
               <Content />
-            </a>
-          </div>
+            </div>
+          </a>
         );
       })
     }
