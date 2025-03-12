@@ -2,11 +2,13 @@
 import "@styles/global.css";
 import Analytics from "@vercel/analytics/astro";
 import { title } from "@utils/title";
+import { ClientRouter } from "astro:transitions";
 ---
 
 <!doctype html>
 <html lang="es">
   <head>
+    <ClientRouter />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
