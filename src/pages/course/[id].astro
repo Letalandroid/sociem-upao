@@ -21,18 +21,23 @@ const { Content } = await render(c);
 
 <Layout>
   <div class="bg-[#006A07] flex justify-center items-center w-full h-56">
-    <div class="max-w-2/3">
-      <div class="absolute flex items-center gap-4 top-[112px]">
+    <div class="relative top-56 lg:top-28 flex flex-col lg:flex-row justify-center max-w-[80%] lg:max-w-1/2">
+      <div
+        class="relative lg:absolute flex flex-col lg:flex-row items-center gap-4 lg:top-[112px]"
+      >
         <img
-          class="w-64 rounded-full outline-6 outline-white"
+          class="w-48 md:w-64 rounded-full outline-6 outline-white"
           transition:name={`img-${slug}`}
           src={img}
           alt={`img-${slug}`}
         />
-        <h1 class="relative bottom-11 text-white !font-bold">{title}</h1>
+        <h1 class="relative lg:bottom-11 lg:!text-white !text-black !font-bold">
+          {title}
+        </h1>
       </div>
-      <div class="mt-[650px]">
+      <div class="lg:mt-[380px]">
         <Content />
+      </div>
     </div>
   </div>
 </Layout>
