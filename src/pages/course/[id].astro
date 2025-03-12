@@ -20,10 +20,19 @@ const { Content } = await render(c);
 ---
 
 <Layout>
-  <div class="bg-[#006A07] w-full h-56"></div>
-  <div class="absolute flex items-center gap-3 top-52">
-    <img class="w-64" transition:name={`img-${slug}`} src={img} alt={`img-${slug}`} />
-    <h1>{title}</h1>
+  <div class="bg-[#006A07] flex justify-center items-center w-full h-56">
+    <div class="max-w-2/3">
+      <div class="absolute flex items-center gap-4 top-[112px]">
+        <img
+          class="w-64 rounded-full outline-6 outline-white"
+          transition:name={`img-${slug}`}
+          src={img}
+          alt={`img-${slug}`}
+        />
+        <h1 class="relative bottom-11 text-white !font-bold">{title}</h1>
+      </div>
+      <div class="mt-[650px]">
+        <Content />
+    </div>
   </div>
-  <Content />
 </Layout>
