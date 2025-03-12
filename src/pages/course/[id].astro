@@ -14,10 +14,11 @@ export const getStaticPaths = (async () => {
 }) satisfies GetStaticPaths;
 
 const { c } = Astro.props;
-const { title, img } = c.data;
+const { data, slug } = c;
+const { title, img } = data;
 ---
 
 <Layout>
-    <img src={img} alt="">
+    <img transition:name={`img-${slug}`} src={img} alt="">
     <h1>{title}</h1>
 </Layout>
