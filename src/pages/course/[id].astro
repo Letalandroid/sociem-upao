@@ -2,22 +2,37 @@
 import type { GetStaticPaths } from "astro";
 import { getCollection } from "astro:content";
 import Layout from "@layouts/Layout.astro";
+import { render } from "astro:content";
 
 export const getStaticPaths = (async () => {
+  const courses = await getCollection("courses");
 
-    const courses = await getCollection('courses');
-
-    return courses.map((c) => ({
-        params: { id: c.slug },
-        props: { c }
-    }));
+  return courses.map((c) => ({
+    params: { id: c.slug },
+    props: { c },
+  }));
 }) satisfies GetStaticPaths;
 
 const { c } = Astro.props;
-const { title, img } = c.data;
+const { data, slug } = c;
+const { title, img } = data;
+const { Content } = await render(c);
 ---
 
 <Layout>
-    <img src={img} alt="">
-    <h1>{title}</h1>
+  <div class="bg-[#006A07] flex justify-center items-center w-full h-56">
+    <div class="max-w-2/3">
+      <div class="absolute flex items-center gap-4 top-[112px]">
+        <img
+          class="w-64 rounded-full outline-6 outline-white"
+          transition:name={`img-${slug}`}
+          src={img}
+          alt={`img-${slug}`}
+        />
+        <h1 class="relative bottom-11 text-white !font-bold">{title}</h1>
+      </div>
+      <div class="mt-[650px]">
+        <Content />
+    </div>
+  </div>
 </Layout>
