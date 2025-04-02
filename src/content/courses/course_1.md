@@ -1,6 +1,6 @@
 ---
+id: 1
 img: '/courses/course_1.webp'
 title: METODOLOGÍA DE GRADE Y DELPHI
+sessions: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 ---
-
-Lorem ipsum dolor sit amet,consectetur adipiscing elit. Donec lobortis molestie nunc in auctor. Morbi condimentum justo at interdum vestibulum. Duis consectetur vel eros **nec placerat**. Curabitur odio leo, viverra in turpis non, gravida pretium nibh. Nullam tincidunt semper mi, eu rhoncus felis eleifend sed.
