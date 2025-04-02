@@ -1,4 +1,5 @@
 ---
+import "@styles/courses/index.css";
 import type { GetStaticPaths } from "astro";
 import { getCollection } from "astro:content";
 import Layout from "@layouts/Layout.astro";
@@ -20,8 +21,16 @@ const { Content } = await render(c);
 ---
 
 <Layout>
-  <div class="bg-[#006A07] flex justify-center items-center w-full h-56">
-    <div class="relative top-56 lg:top-28 flex flex-col lg:flex-row justify-center max-w-[80%] lg:max-w-1/2">
+  <div
+    class={`bg-[url(${img})] bg-center bg-no-repeat bg-cover blur-xs flex justify-center items-center w-full h-56`}
+  >
+  </div>
+  <div
+    class='relative -top-56 flex justify-center items-center w-full h-56'
+  >
+    <div
+      class="relative top-56 lg:top-28 flex flex-col lg:flex-row justify-center max-w-[80%] lg:max-w-1/2"
+    >
       <div
         class="relative lg:absolute w-full flex flex-col lg:flex-row items-center gap-4 lg:top-[112px]"
       >
@@ -31,7 +40,7 @@ const { Content } = await render(c);
           src={img}
           alt={`img-${slug}`}
         />
-        <h1 class="relative lg:bottom-11 lg:!text-white !text-black !font-bold">
+        <h1 class="relative stroke lg:bottom-11 stroke-current lg:!text-white !text-black !font-bold">
           {title}
         </h1>
       </div>
