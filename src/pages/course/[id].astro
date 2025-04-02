@@ -1,4 +1,5 @@
 ---
+import "@styles/courses/index.css";
 import type { GetStaticPaths } from "astro";
 import { getCollection } from "astro:content";
 import Layout from "@layouts/Layout.astro";
@@ -15,29 +16,57 @@ export const getStaticPaths = (async () => {
 
 const { c } = Astro.props;
 const { data, slug } = c;
-const { title, img } = data;
+const { id, title, img, sessions } = data;
 const { Content } = await render(c);
 ---
 
 <Layout>
-  <div class="bg-[#006A07] flex justify-center items-center w-full h-56">
-    <div class="relative top-56 lg:top-28 flex flex-col lg:flex-row justify-center max-w-[80%] lg:max-w-1/2">
+  <div
+    style={`background-image: url(${img});`}
+    class="bg-center bg-no-repeat bg-cover blur-xs flex justify-center items-center w-full h-56"
+  >
+  </div>
+  <div class="relative -top-56 flex justify-center items-center w-full h-56">
+    <div
+      class="relative top-56 lg:top-28 flex flex-col lg:flex-row justify-center max-w-[80%] lg:max-w-1/2"
+    >
       <div
-        class="relative lg:absolute w-full flex flex-col lg:flex-row items-center gap-4 lg:top-[112px]"
+        class="relative w-full flex flex-col lg:flex-row items-center gap-4 lg:top-[20px]"
       >
         <img
-          class="w-48 md:w-64 rounded-full outline-6 outline-white"
+          class="w-64 md:w-64 rounded-full outline-6 outline-white"
           transition:name={`img-${slug}`}
           src={img}
           alt={`img-${slug}`}
         />
-        <h1 class="relative lg:bottom-11 lg:!text-white !text-black !font-bold">
+        <h1
+          class="relative stroke lg:bottom-11 stroke-current lg:!text-white !text-black !font-bold"
+        >
           {title}
         </h1>
       </div>
-      <div class="lg:mt-[380px]">
-        <Content />
-      </div>
+    </div>
+  </div>
+  <div class="flex justify-center mb-4">
+    <div
+      class="max-w-[1024px] flex flex-wrap gap-3 justify-center mt-20 lg:mt-0"
+    >
+      {
+        sessions.map((s) => {
+          return (
+            <div class="rounded overflow-hidden">
+              <a data-aos="fade-up" href={`session/session_${id}_${s}`}>
+                <img
+                  transition:name={`session-${s}`}
+                  class="w-64 rounded object-cover transition duration-200 hover:scale-110"
+                  src={`/courses/${id}/s${s}.jpg`}
+                  alt={`session-${s}`}
+                />
+              </a>
+            </div>
+          );
+        })
+      }
     </div>
   </div>
 </Layout>

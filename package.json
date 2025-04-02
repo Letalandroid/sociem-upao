@@ -13,6 +13,7 @@
     "@tailwindcss/typography": "^0.5.16",
     "@tailwindcss/vite": "^4.0.13",
     "@vercel/analytics": "^1.5.0",
+    "aos": "^2.3.4",
     "astro": "^5.4.2",
     "tailwindcss": "^4.0.13",
     "tw-elements": "^2.0.0"
