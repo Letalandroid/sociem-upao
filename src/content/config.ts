@@ -13,7 +13,8 @@ const sessions = defineCollection({
   schema: z.object({
     id: z.number(),
     img: z.string(),
-    course: z.string()
+    course: z.string(),
+    video: z.string()
   })
 })
 

@@ -47,16 +47,21 @@ const { Content } = await render(c);
     </div>
   </div>
   <div class="flex justify-center">
-    <div class="max-w-[1024px] flex flex-wrap gap-3 justify-center mt-20 lg:mt-0">
+    <div
+      class="max-w-[1024px] flex flex-wrap gap-3 justify-center mt-20 lg:mt-0"
+    >
       {
         sessions.map((s) => {
           return (
             <div class="rounded overflow-hidden">
-              <img
-                class="w-64 rounded object-cover transition duration-200 hover:scale-110"
-                src={`/courses/${id}/s${s}.jpg`}
-                alt={`session-${s}`}
-              />
+              <a href={`session/session_${id}_${s}`}>
+                <img
+                  transition:name={`session-${s}`}
+                  class="w-64 rounded object-cover transition duration-200 hover:scale-110"
+                  src={`/courses/${id}/s${s}.jpg`}
+                  alt={`session-${s}`}
+                />
+              </a>
             </div>
           );
         })
