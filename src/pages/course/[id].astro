@@ -22,7 +22,8 @@ const { Content } = await render(c);
 
 <Layout>
   <div
-    class={`bg-[url(${img})] bg-center bg-no-repeat bg-cover blur-xs flex justify-center items-center w-full h-56`}
+    style={`background-image: url(${img});`}
+    class="bg-center bg-no-repeat bg-cover blur-xs flex justify-center items-center w-full h-56"
   >
   </div>
   <div class="relative -top-56 flex justify-center items-center w-full h-56">
@@ -46,7 +47,7 @@ const { Content } = await render(c);
       </div>
     </div>
   </div>
-  <div class="flex justify-center">
+  <div class="flex justify-center mb-4">
     <div
       class="max-w-[1024px] flex flex-wrap gap-3 justify-center mt-20 lg:mt-0"
     >
