@@ -5,6 +5,7 @@ const courses = defineCollection({
     id: z.number(),
     img: z.string(),
     title: z.string(),
+    sessionTitles:z.array(z.string()),
     sessions: z.array(z.number()),
   }),
 });
