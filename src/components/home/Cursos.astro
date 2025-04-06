@@ -26,12 +26,12 @@ const courses = await getCollection("courses");
           >
             <img
               transition:name={`img-${slug}`}
-              class="w-full sm:w-64 rounded"
+              class="w-full sm:w-64 h-[256px] sm:h-64 object-cover rounded"
               src={img}
               alt={`Curso ${slug.replace("-", " ")}`}
             />
             <div class="text-black">
-              <h4 class="!font-bold underline">{title}</h4>
+              <h4 class="!font-bold text-center sm:!text-start underline">{title}</h4>
               <div class="hidden sm:block">
                 {sessionTitles.map((t) => {
                   return <p class="mb-0">- {t}</p>;
