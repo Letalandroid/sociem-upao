@@ -1,4 +1,5 @@
 ---
+import '@styles/components/Cursos.module.css';
 import { getCollection, render } from "astro:content";
 
 const courses = await getCollection("courses");
@@ -15,18 +16,26 @@ const courses = await getCollection("courses");
       courses.map(async (c) => {
         const { Content } = await render(c);
         const { data, slug } = c;
-        const { title, img } = data;
+        const { title, img, sessionTitles } = data;
 
         return (
-          <a href={`/course/${slug}`} class="!no-underline not-last:my-3 flex flex-col items-center gap-3">
+          <a
+            href={`/course/${slug}`}
+            class="!no-underline not-last:my-3 flex flex-col sm:flex-row items-center gap-3"
+          >
             <img
               transition:name={`img-${slug}`}
-              class="w-full sm:w-52 rounded"
+              class="w-full sm:w-64 rounded"
               src={img}
               alt={`Curso ${slug.replace("-", " ")}`}
             />
             <div class="text-black">
-              <h4 class="!font-bold !text-[18px] underline">{title}</h4>
+              <h4 class="!font-bold underline">{title}</h4>
+              <div class="hidden sm:block">
+                {sessionTitles.map((t) => {
+                  return <p class="mb-0">- {t}</p>;
+                })}
+              </div>
               <Content />
             </div>
           </a>
