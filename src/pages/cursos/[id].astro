@@ -34,7 +34,7 @@ const { Content } = await render(c);
         class="relative w-full flex flex-col lg:flex-row items-center gap-4 lg:top-[20px]"
       >
         <img
-          class="w-64 md:w-64 rounded-full outline-6 outline-white"
+          class="w-64 h-64 md:w-64 object-cover rounded-full outline-6 outline-white"
           transition:name={`img-${slug}`}
           src={img}
           alt={`img-${slug}`}
@@ -58,7 +58,7 @@ const { Content } = await render(c);
               <a data-aos="fade-up" href={`secciones/session_${id}_${s}`}>
                 <img
                   transition:name={`session-${s}`}
-                  class="w-64 rounded object-cover transition duration-200 hover:scale-110"
+                  class="w-64 h-64 object-cover rounded transition duration-200 hover:scale-110"
                   src={`/courses/${id}/s${s}.jpg`}
                   alt={`session-${s}`}
                 />
