@@ -1,6 +1,7 @@
 ---
 import '@styles/components/Cursos.module.css';
 import { getCollection, render } from "astro:content";
+import VerCursos from './VerCursos.astro';
 
 const courses = await getCollection("courses");
 ---
@@ -20,7 +21,7 @@ const courses = await getCollection("courses");
 
         return (
           <a
-            href={`/course/${slug}`}
+            href={`/cursos/${slug}`}
             class="!no-underline not-last:my-3 flex flex-col sm:flex-row items-center gap-3"
           >
             <img
@@ -42,5 +43,6 @@ const courses = await getCollection("courses");
         );
       })
     }
+    <VerCursos />
   </div>
 </div>
