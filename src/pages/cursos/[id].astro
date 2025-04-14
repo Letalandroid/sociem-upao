@@ -54,8 +54,8 @@ const { Content } = await render(c);
       {
         sessions.map((s) => {
           return (
-            <div class="rounded overflow-hidden">
-              <a data-aos="fade-up" href={`secciones/session_${id}_${s}`}>
+            <div data-aos="zoom-out" class="rounded overflow-hidden">
+              <a href={`secciones/session_${id}_${s}`}>
                 <img
                   transition:name={`session-${s}`}
                   class="w-64 h-64 object-cover rounded transition duration-200 hover:scale-110"
