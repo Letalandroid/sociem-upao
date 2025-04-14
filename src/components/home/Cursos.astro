@@ -1,7 +1,7 @@
 ---
-import '@styles/components/Cursos.module.css';
+import "@styles/components/Cursos.module.css";
 import { getCollection, render } from "astro:content";
-import VerCursos from './VerCursos.astro';
+import VerCursos from "./VerCursos.astro";
 
 const courses = await getCollection("courses");
 ---
@@ -21,6 +21,8 @@ const courses = await getCollection("courses");
 
         return (
           <a
+            data-aos="zoom-in"
+            data-aos-duration="850"
             href={`/cursos/${slug}`}
             class="!no-underline not-last:my-3 flex flex-col sm:flex-row items-center gap-3"
           >
@@ -31,7 +33,9 @@ const courses = await getCollection("courses");
               alt={`Curso ${slug.replace("-", " ")}`}
             />
             <div class="text-black">
-              <h4 class="!font-bold text-center sm:!text-start underline">{title}</h4>
+              <h4 class="!font-bold text-center sm:!text-start underline">
+                {title}
+              </h4>
               <div class="hidden sm:block">
                 {sessionTitles.map((t) => {
                   return <p class="mb-0">- {t}</p>;
