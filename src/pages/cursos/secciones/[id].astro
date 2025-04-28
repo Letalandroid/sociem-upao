@@ -13,7 +13,7 @@ export const getStaticPaths = (async () => {
 }) satisfies GetStaticPaths;
 
 const { s } = Astro.props;
-const { data, slug } = s;
+const { data } = s;
 const { id, img, course, video } = data;
 ---
 
