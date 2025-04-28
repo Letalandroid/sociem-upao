@@ -9,7 +9,7 @@ sessionTitles:
     "Taxonomia de los estudios clínicos y su valor en el contexto de la MEB",
     "Medidas de asociación y efecto",
     "Análisis de sesgo y calidad metodológica",
-    "Sesion 6",
+    "Sistema Grade para la Evaluación de la Calidad de la Evidencia",
     "Lectura crítica de estudios clínicos. Un pilar de la MBE",
     "Aplicación del sistema grade en práctica clínica",
     "Bioestadística aplicada a la medicina en evidencia",
