@@ -7,7 +7,7 @@ export const getStaticPaths = (async () => {
   const sessions = await getCollection("sessions");
 
   return sessions.map((s) => ({
-    params: { id: s.slug },
+    params: { id: s.id.replace(".md", "").replace(/^.*\//, "") },
     props: { s },
   }));
 }) satisfies GetStaticPaths;
