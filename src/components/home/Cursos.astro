@@ -6,47 +6,86 @@ import VerCursos from "./VerCursos.astro";
 const courses = await getCollection("courses");
 ---
 
-<div class="flex justify-center items-center m-5">
-  <div class="flex flex-col items-center sm:items-start max-w-4/5 sm:max-w-5xl">
-    <h3
-      class="!my-4 bg-[#006A07] px-4 py-2 text-white !font-bold rounded-full !text-2xl"
-    >
-      Últimos Cursos
-    </h3>
-    {
-      courses.map(async (c) => {
-        const { Content } = await render(c);
-        const { data, slug } = c;
-        const { title, img, sessionTitles } = data;
+<section class="py-32 bg-slate-950/20 relative">
+  <!-- Subtle top accent -->
+  <div class="absolute top-0 inset-x-10 h-px bg-gradient-to-r from-transparent via-brand-primary/20 to-transparent"></div>
 
-        return (
-          <a
-            data-aos="zoom-in"
-            data-aos-duration="850"
-            href={`/cursos/${slug}`}
-            class="!no-underline not-last:my-3 flex flex-col sm:flex-row items-center gap-3"
-          >
-            <img
-              transition:name={`img-${slug}`}
-              class="w-full sm:w-64 h-[256px] sm:h-64 object-cover rounded"
-              src={img}
-              alt={`Curso ${slug.replace("-", " ")}`}
-            />
-            <div class="text-black">
-              <h4 class="!font-bold text-center sm:!text-start underline">
-                {title}
-              </h4>
-              <div class="hidden sm:block">
-                {sessionTitles.map((t) => {
-                  return <p class="mb-0">- {t}</p>;
-                })}
+  <div class="container mx-auto px-6 max-w-6xl">
+    <div class="flex flex-col md:flex-row justify-between items-end mb-20 gap-8" data-aos="fade-right">
+      <div class="space-y-4">
+        <h3 class="text-white text-4xl md:text-5xl font-extrabold tracking-tight font-display drop-shadow-sm">
+          Nuestros <span class="bg-gradient-to-r from-brand-primary to-brand-secondary bg-clip-text text-transparent">Cursos</span>
+        </h3>
+        <p class="text-slate-400 text-lg font-medium max-w-xl">
+          Especialízate con los mejores. Programas diseñados por expertos orientados a la práctica científica y metodológica.
+        </p>
+      </div>
+      <div class="hidden md:block">
+        <VerCursos />
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+      {
+        courses.map(async (c) => {
+          const { data, slug } = c;
+          const { title, img, sessionTitles } = data;
+
+          return (
+            <a
+              data-aos="fade-up"
+              data-aos-duration="1000"
+              href={`/cursos/${slug}`}
+              class="group relative flex flex-col glass rounded-3xl overflow-hidden card-hover transition-all duration-300 !no-underline border-white/5 border-[1px] hover:border-brand-primary/40"
+            >
+              {/* Image Container with Overlay - Dark Mode Style */}
+              <div class="relative h-64 overflow-hidden bg-slate-900">
+                <img
+                  transition:name={`img-${slug}`}
+                  class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-80 group-hover:opacity-100"
+                  src={img}
+                  alt={`Curso ${slug.replace("-", " ")}`}
+                />
+                <div class="absolute inset-x-0 bottom-0 py-10 px-6 bg-gradient-to-t from-slate-950/90 to-transparent pointer-events-none transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500 opacity-0 group-hover:opacity-100 backdrop-blur-[2px]">
+                   <span class="text-white text-xs font-bold uppercase tracking-widest bg-brand-primary/40 px-3 py-1 rounded-full backdrop-blur-md">Certificado Disponible</span>
+                </div>
               </div>
-              <Content />
-            </div>
-          </a>
-        );
-      })
-    }
-    <VerCursos />
+
+              {/* Content Section - Dark Layout */}
+              <div class="p-8 flex flex-col h-full bg-slate-900/40">
+                <h4 class="text-white font-bold text-xl mb-4 group-hover:text-brand-primary transition-colors font-display line-clamp-2">
+                  {title}
+                </h4>
+                
+                <div class="space-y-3 mb-8 flex-grow">
+                  {sessionTitles.slice(0, 3).map((t) => (
+                    <div class="flex items-start gap-2 text-sm text-slate-400 group-hover:text-slate-300 transition-colors">
+                      <span class="text-brand-primary mt-1 text-[10px] transform group-hover:translate-x-1 transition-transform">✦</span>
+                      <p class="mb-0 line-clamp-1">{t}</p>
+                    </div>
+                  ))}
+                  {sessionTitles.length > 3 && (
+                    <p class="text-xs text-brand-primary/70 font-bold mt-2 ml-4">+ {sessionTitles.length - 3} sesiones adicionales</p>
+                  )}
+                </div>
+
+                <div class="pt-6 border-t border-white/5 mt-auto flex justify-between items-center">
+                  <span class="text-brand-primary font-bold text-sm tracking-tight inline-flex items-center gap-2 group-hover:gap-5 transition-all">
+                    Ver Detalles <i class="fas fa-chevron-right text-[10px] opacity-70"></i>
+                  </span>
+                  <div class="w-12 h-12 rounded-full bg-slate-800/50 flex items-center justify-center group-hover:bg-brand-primary transition-all duration-500 border border-white/5 group-hover:border-transparent">
+                    <i class="fas fa-arrow-right text-brand-primary text-xs group-hover:text-white transform group-hover:rotate-[-45deg] transition-all"></i>
+                  </div>
+                </div>
+              </div>
+            </a>
+          );
+        })
+      }
+    </div>
+    
+    <div class="flex justify-center mt-12 md:hidden">
+       <VerCursos />
+    </div>
   </div>
-</div>
+</section>

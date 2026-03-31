@@ -1,9 +1,8 @@
 ---
 import "@styles/courses/index.css";
 import type { GetStaticPaths } from "astro";
-import { getCollection } from "astro:content";
+import { getCollection, render } from "astro:content";
 import Layout from "@layouts/Layout.astro";
-import { render } from "astro:content";
 
 export const getStaticPaths = (async () => {
   const courses = await getCollection("courses");
@@ -17,56 +16,116 @@ export const getStaticPaths = (async () => {
 const { c } = Astro.props;
 const { data, slug } = c;
 const { id, title, img, sessions } = data;
-const { Content } = await render(c);
 ---
 
 <Layout>
-  <div
-    style={`background-image: url(${img});`}
-    class="bg-center bg-no-repeat bg-cover blur-xs flex justify-center items-center w-full h-56"
-  >
-  </div>
-  <div class="relative -top-56 flex justify-center items-center w-full h-56">
-    <div
-      class="relative top-56 lg:top-28 flex flex-col lg:flex-row justify-center max-w-[80%] lg:max-w-1/2"
-    >
-      <div
-        class="relative w-full flex flex-col lg:flex-row items-center gap-4 lg:top-[20px]"
-      >
-        <img
-          class="w-64 h-64 md:w-64 object-cover rounded-full outline-6 outline-white"
-          transition:name={`img-${slug}`}
-          src={img}
-          alt={`img-${slug}`}
-        />
-        <h1
-          class="relative stroke lg:bottom-11 stroke-current lg:!text-white !text-black !font-bold"
-        >
-          {title}
-        </h1>
+  <!-- Hero Banner - Immersive Dark View -->
+  <section class="relative h-[450px] md:h-[600px] overflow-hidden flex items-end">
+    <!-- Parallax style background image with dark overlay -->
+    <div 
+      class="absolute inset-0 bg-cover bg-center transition-transform duration-1000 scale-110 group-hover:scale-100"
+      style={`background-image: url(${img});`}
+    ></div>
+    <!-- Layered dark gradients for readability -->
+    <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/70 to-black/30"></div>
+    <!-- Accent radial glow -->
+    <div class="absolute top-0 right-0 w-[40%] h-[100%] bg-brand-primary/10 rounded-full blur-[150px] pointer-events-none opacity-50"></div>
+    
+    <div class="container mx-auto px-6 max-w-6xl relative z-10 pb-20">
+      <div class="flex flex-col md:flex-row items-center md:items-end gap-10 pt-20" data-aos="fade-up">
+        <!-- Floating Thumbnail with Glow - Dark optimized -->
+        <div class="relative group shrink-0">
+          <div class="absolute inset-0 bg-brand-primary/30 shadow-2xl rounded-3xl blur-3xl scale-90 group-hover:scale-105 transition-all opacity-0 group-hover:opacity-100"></div>
+          <img
+            class="relative w-52 h-52 md:w-72 md:h-72 object-cover rounded-3xl border-4 border-white/10 shadow-2xl transition-transform duration-500 hover:scale-[1.02] bg-slate-900"
+            transition:name={`img-${slug}`}
+            src={img}
+            alt={title}
+          />
+        </div>
+        
+        <!-- Course Content - High Contrast -->
+        <div class="flex flex-col text-center md:text-left space-y-6">
+          <span class="inline-block px-4 py-1.5 bg-brand-secondary/10 text-brand-secondary text-xs font-bold uppercase tracking-[0.2em] rounded-full self-center md:self-start border border-brand-secondary/20 shadow-[0_0_15px_rgba(190,242,100,0.1)]">
+            Especialización Médica
+          </span>
+          <h1 class="text-4xl md:text-7xl font-extrabold text-white leading-[1.1] drop-shadow-xl font-display tracking-tight">
+            {title}
+          </h1>
+          <div class="flex flex-wrap items-center justify-center md:justify-start gap-6 text-slate-300 font-semibold text-base">
+             <span class="flex items-center gap-3"><i class="fas fa-layer-group text-brand-primary text-lg"></i> {sessions.length} Sesiones Académicas</span>
+             <span class="w-2 h-2 bg-brand-secondary/40 rounded-full hidden md:block"></span>
+             <span class="flex items-center gap-3"><i class="fas fa-certificate text-brand-primary text-lg"></i> Certificado de Participación</span>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-  <div class="flex justify-center mb-4">
-    <div
-      class="max-w-[1024px] flex flex-wrap gap-3 justify-center mt-20 lg:mt-0"
-    >
-      {
-        sessions.map((s) => {
-          return (
-            <div data-aos="zoom-out" class="rounded overflow-hidden">
-              <a href={`secciones/session_${id}_${s}`}>
-                <img
-                  transition:name={`session-${s}`}
-                  class="w-64 h-64 object-cover rounded transition duration-200 hover:scale-110"
-                  src={`/courses/${id}/s${s}.jpg`}
-                  alt={`session-${s}`}
-                />
-              </a>
+  </section>
+
+  <!-- Sessions Section - Dark Context -->
+  <section class="py-32 bg-slate-950 relative overflow-hidden">
+    <!-- Subtle section background graphics -->
+    <div class="absolute top-1/2 left-0 -translate-x-[200px] w-96 h-96 bg-brand-primary/5 rounded-full blur-[100px] pointer-events-none"></div>
+
+    <div class="container mx-auto px-6 max-w-6xl relative z-10">
+      <div class="flex flex-col items-center text-center mb-24 space-y-5" data-aos="fade-right">
+          <h2 class="text-3xl md:text-5xl font-extrabold text-white font-display tracking-tight">Estructura Académica</h2>
+          <div class="h-1.5 w-24 bg-brand-primary rounded-full shadow-[0_0_10px_rgba(16,185,129,0.5)]"></div>
+          <p class="text-slate-400 text-lg md:text-xl max-w-3xl mt-6 font-medium leading-relaxed">
+            Completa cada módulo para obtener un conocimiento profundo. Diseñado con una metodología orientada a resultados científicos.
+          </p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+        {
+          sessions.map((s, index) => {
+            return (
+              <div 
+                data-aos="fade-up" 
+                data-aos-delay={index * 100}
+                class="group relative"
+              >
+                <a 
+                  href={`/cursos/secciones/session_${id}_${s}`}
+                  class="block glass rounded-[2.5rem] overflow-hidden card-hover !no-underline border border-white/5 bg-slate-900/10"
+                >
+                  <div class="relative h-64 overflow-hidden bg-slate-900">
+                    <img
+                      transition:name={`session-${s}`}
+                      class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-90 group-hover:opacity-100"
+                      src={`/courses/${id}/s${s}.jpg`}
+                      alt={`Módulo ${s}`}
+                    />
+                    <!-- Overlay Badge - Neon aesthetic -->
+                    <div class="absolute top-5 left-5 w-14 h-14 bg-brand-primary text-white flex items-center justify-center rounded-full font-bold text-xl shadow-2xl border-2 border-white/20 z-10">
+                      {s}
+                    </div>
+                    <!-- Hover gradient overlay -->
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                  </div>
+                  
+                  <div class="p-8 text-center bg-slate-900/40">
+                    <h3 class="text-white font-extrabold text-2xl transition-colors group-hover:text-brand-primary font-display mb-0">
+                      Módulo {s}
+                    </h3>
+                  </div>
+                </a>
+              </div>
+            );
+          })
+        }
+      </div>
+      
+      <!-- Premium Back Navigation -->
+      <div class="flex justify-center mt-32">
+         <a href="/cursos" class="group relative px-10 py-4 glass !bg-slate-900/50 rounded-full border border-white/10 overflow-hidden !no-underline hover:border-brand-primary/30 transition-all shadow-2xl">
+            <div class="absolute inset-0 bg-brand-primary/10 -translate-x-[120%] group-hover:translate-x-0 transition-transform duration-500"></div>
+            <div class="relative z-10 flex items-center gap-4 text-white font-bold tracking-tight">
+              <i class="fas fa-chevron-left text-xs text-brand-primary group-hover:-translate-x-2 transition-transform"></i>
+              Regresar al Catálogo
             </div>
-          );
-        })
-      }
+         </a>
+      </div>
     </div>
-  </div>
+  </section>
 </Layout>

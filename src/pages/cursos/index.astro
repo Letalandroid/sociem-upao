@@ -1,32 +1,52 @@
 ---
 import Layout from "@layouts/Layout.astro";
 import "@styles/components/Cursos.module.css";
-import { getCollection, render } from "astro:content";
+import { getCollection } from "astro:content";
 
 const courses = await getCollection("courses");
 ---
 
 <Layout>
-  <div class="flex justify-center items-center m-5">
-    <div
-      class="flex flex-col items-center sm:items-start max-w-4/5 sm:max-w-5xl"
-    >
-      <div>
-        <input
-          id="searchInput"
-          class="w-full sm:w-[400px] border border-black p-1.5 rounded"
-          type="text"
-          placeholder="Buscar curso..."
-        />
+  <section class="py-32 bg-slate-950 min-h-screen relative overflow-hidden">
+    <!-- Sophisticated background for Dark Catalog -->
+    <div class="absolute inset-0 -z-10 bg-slate-950">
+      <div class="absolute top-0 right-0 w-[50%] h-[50%] bg-brand-primary/5 rounded-full blur-[150px] animate-pulse"></div>
+      <div class="absolute bottom-0 left-0 w-[40%] h-[40%] bg-brand-secondary/5 rounded-full blur-[120px] animate-pulse transition-delay-2000"></div>
+    </div>
+
+    <div class="container mx-auto px-6 max-w-6xl relative z-10">
+      <!-- Page Header - Dark Style -->
+      <div class="flex flex-col items-center text-center mb-24 space-y-6" data-aos="fade-down">
+         <span class="inline-block px-4 py-1.5 bg-brand-primary/10 text-brand-primary text-xs font-bold uppercase tracking-widest rounded-full border border-brand-primary/20 shadow-[0_0_15px_rgba(16,185,129,0.1)]">Nuestra Oferta Educativa</span>
+         <h1 class="text-4xl md:text-7xl font-extrabold text-white tracking-tight font-display drop-shadow-lg">
+           Catálogo de <span class="bg-gradient-to-r from-brand-primary to-brand-secondary bg-clip-text text-transparent">Cursos</span>
+         </h1>
+         <p class="text-slate-400 text-lg md:text-xl font-medium max-w-2xl leading-relaxed">
+           Explora nuestra oferta académica de vanguardia, diseñada para potenciar tu trayectoria en la investigación científica.
+         </p>
+      </div>
+
+      <!-- Search Section - Premium Dark -->
+      <div class="flex flex-col md:flex-row justify-center items-center gap-6 mb-24" data-aos="fade-up">
+        <div class="relative w-full max-w-2xl group">
+          <i class="fas fa-search absolute left-5 top-1/2 -translate-y-1/2 text-slate-500 group-focus-within:text-brand-primary transition-colors"></i>
+          <input
+            id="searchInput"
+            class="w-full bg-slate-900 border border-white/10 p-5 pl-14 rounded-full focus:outline-none focus:ring-4 focus:ring-brand-primary/10 focus:border-brand-primary/40 text-white transition-all shadow-2xl placeholder:text-slate-600"
+            type="text"
+            placeholder="¿Qué área de la medicina deseas investigar?..."
+          />
+        </div>
         <button
           id="searchButton"
-          class="bg-[#006A07] hover:bg-[#346a35] transition duration-105 text-white px-3 py-2 font-bold"
+          class="bg-brand-primary hover:bg-brand-accent text-white px-10 py-5 rounded-full font-bold shadow-xl shadow-brand-primary/20 transition-all active:scale-95 border border-white/5 whitespace-nowrap"
         >
-          Buscar
+          Buscar Curso
         </button>
       </div>
 
-      <div id="courseList">
+      <!-- Course List Grid - Consistent Dark Cards -->
+      <div id="courseList" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
         {
           courses.map((c) => {
             const { data, slug } = c;
@@ -35,23 +55,48 @@ const courses = await getCollection("courses");
             return (
               <a
                 href={`/cursos/${slug}`}
-                class="!no-underline my-3 flex flex-col sm:flex-row items-center gap-3"
+                class="group relative flex flex-col glass rounded-3xl overflow-hidden card-hover transition-all duration-300 !no-underline border border-white/5 hover:border-brand-primary/30"
                 data-title={title}
+                data-aos="fade-up"
               >
-                <img
-                  transition:name={`img-${slug}`}
-                  class="w-full sm:w-64 h-[256px] sm:h-64 object-cover rounded"
-                  src={img}
-                  alt={`Curso ${slug.replace("-", " ")}`}
-                />
-                <div class="text-black">
-                  <h4 class="!font-bold text-center sm:!text-start underline">
+                {/* Image Container with Overlay */}
+                <div class="relative h-64 overflow-hidden bg-slate-900/50">
+                  <img
+                    transition:name={`img-${slug}`}
+                    class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-90"
+                    src={img}
+                    alt={`Curso ${slug.replace("-", " ")}`}
+                  />
+                  <div class="absolute inset-x-0 bottom-0 py-10 px-6 bg-gradient-to-t from-slate-950/90 to-transparent pointer-events-none transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500 opacity-0 group-hover:opacity-100 backdrop-blur-[2px]">
+                     <span class="text-white text-[10px] font-bold uppercase tracking-[0.2em] bg-brand-primary/40 px-3 py-1 rounded-full backdrop-blur-md">Certificación Incluida</span>
+                  </div>
+                </div>
+
+                {/* Content Section */}
+                <div class="p-8 flex flex-col h-full bg-slate-900/20">
+                  <h4 class="text-white font-bold text-xl mb-4 group-hover:text-brand-primary transition-colors font-display line-clamp-2">
                     {title}
                   </h4>
-                  <div class="hidden sm:block">
-                    {sessionTitles.map((t) => {
-                      return <p class="mb-0">- {t}</p>;
-                    })}
+                  
+                  <div class="space-y-3 mb-8 flex-grow">
+                    {sessionTitles.slice(0, 3).map((t) => (
+                      <div class="flex items-start gap-3 text-sm text-slate-400 group-hover:text-slate-300 transition-colors">
+                        <span class="text-brand-primary mt-1 text-[10px] transform group-hover:translate-x-1 transition-transform">✦</span>
+                        <p class="mb-0 line-clamp-1">{t}</p>
+                      </div>
+                    ))}
+                    {sessionTitles.length > 3 && (
+                      <p class="text-xs text-brand-primary/60 font-bold mt-2">+ {sessionTitles.length - 3} sesiones más</p>
+                    )}
+                  </div>
+
+                  <div class="pt-6 border-t border-white/5 mt-auto flex justify-between items-center">
+                    <span class="text-brand-primary font-bold text-sm tracking-tight inline-flex items-center gap-2 group-hover:gap-5 transition-all">
+                      Ver Detalles <i class="fas fa-chevron-right text-[10px] opacity-70"></i>
+                    </span>
+                    <div class="w-12 h-12 rounded-full bg-slate-800 flex items-center justify-center group-hover:bg-brand-primary transition-all duration-500 border border-white/5 group-hover:border-transparent">
+                      <i class="fas fa-arrow-right text-brand-primary text-xs group-hover:text-white transform group-hover:rotate-[-45deg] transition-all"></i>
+                    </div>
                   </div>
                 </div>
               </a>
@@ -59,42 +104,59 @@ const courses = await getCollection("courses");
           })
         }
       </div>
+      
+      <!-- No results message - Dark Optimized -->
+      <div id="noResults" class="hidden flex-col items-center justify-center py-32 text-center">
+          <div class="relative mb-10">
+            <div class="absolute inset-0 bg-brand-primary/20 rounded-full blur-[80px]"></div>
+            <i class="fas fa-search text-7xl text-slate-800 relative z-10"></i>
+          </div>
+          <h3 class="text-3xl font-bold text-white mb-4 font-display">Sin resultados para tu búsqueda</h3>
+          <p class="text-slate-500 max-w-md text-lg">No encontramos coincidencias para esa área específica. Prueba con términos más generales.</p>
+          <button id="resetSearch" class="mt-10 px-8 py-3 bg-slate-900 border border-white/10 rounded-full text-brand-secondary font-bold hover:bg-slate-800 transition-all hover:border-brand-secondary/30">Mostrar todos los cursos</button>
+      </div>
     </div>
-  </div>
+  </section>
 
   <script>
-    // JavaScript para manejar la búsqueda
     const searchInput = document.getElementById("searchInput");
     const courseList = document.getElementById("courseList");
     const searchButton = document.getElementById("searchButton");
+    const noResults = document.getElementById("noResults");
+    const resetSearchBtn = document.getElementById("resetSearch");
 
-    searchButton?.addEventListener("click", () => {
-      const searchQuery = searchInput.value.toLowerCase();
+    function updateSearch() {
+      const searchQuery = searchInput.value.toLowerCase().trim();
       const courses = Array.from(courseList.children);
+      let found = 0;
 
       courses.forEach((course) => {
-        const title = course.getAttribute("data-title")?.toLowerCase();
-        if (title?.includes(searchQuery)) {
-          course.style.display = "";
-        } else {
-          course.style.display = "none";
-        }
-      });
-    });
-
-    // También filtrar mientras se escribe en el campo de búsqueda (opcional)
-    searchInput?.addEventListener("input", () => {
-      const searchQuery = searchInput.value.toLowerCase();
-      const courses = Array.from(courseList.children);
-
-      courses.forEach((course) => {
-        const title = course.getAttribute("data-title").toLowerCase();
+        const title = course.getAttribute("data-title")?.toLowerCase() || "";
         if (title.includes(searchQuery)) {
           course.style.display = "";
+          found++;
         } else {
           course.style.display = "none";
         }
       });
+
+      if (found === 0) {
+        courseList.classList.add("hidden");
+        noResults.classList.remove("hidden");
+        noResults.classList.add("flex");
+      } else {
+        courseList.classList.remove("hidden");
+        noResults.classList.add("hidden");
+        noResults.classList.remove("flex");
+      }
+    }
+
+    searchButton?.addEventListener("click", updateSearch);
+    searchInput?.addEventListener("input", updateSearch);
+    
+    resetSearchBtn?.addEventListener("click", () => {
+      searchInput.value = "";
+      updateSearch();
     });
   </script>
 </Layout>

@@ -1,1 +1,76 @@
 @import "tailwindcss";
+
+@theme {
+  /* Colors - Dark Theme focused */
+  --color-brand-primary: #10b981; /* Emerald 500 */
+  --color-brand-secondary: #bef264; /* Lime 300 */
+  --color-brand-accent: #34d399; /* Emerald 400 */
+  
+  --color-background: #020617; /* Slate 950 */
+  --color-foreground: #f8fafc; /* Slate 50 */
+  
+  --color-muted: #1e293b; /* Slate 800 */
+  --color-muted-foreground: #94a3b8; /* Slate 400 */
+  
+  --color-card: #0f172a; /* Slate 900 */
+  --color-card-foreground: #f8fafc;
+  
+  --color-border: #1e293b;
+
+  /* Typography - Fixed naming for v4 utilities */
+  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
+  --font-display: "Outfit", system-ui, -apple-system, sans-serif;
+
+  --radius-xl: 1.5rem;
+  --radius-2xl: 2rem;
+
+  --shadow-premium: 0 20px 25px -5px rgb(0 0 0 / 0.5), 0 8px 10px -6px rgb(0 0 0 / 0.5);
+  --shadow-inner-glow: inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+}
+
+@layer base {
+  body {
+    @apply bg-background text-foreground font-sans antialiased selection:bg-brand-primary selection:text-white;
+    background-image: 
+      radial-gradient(at 0% 0%, hsla(160, 100%, 10%, 1) 0, transparent 50%),
+      radial-gradient(at 50% 0%, hsla(160, 80%, 5%, 1) 0, transparent 50%),
+      radial-gradient(at 100% 0%, hsla(140, 100%, 10%, 1) 0, transparent 50%);
+    background-attachment: fixed;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    /* Using standard theme() function if @apply is failing for custom name safely */
+    font-family: var(--font-display);
+    @apply tracking-tight;
+  }
+}
+
+@layer components {
+  .glass {
+    @apply bg-slate-900/60 backdrop-blur-xl border border-white/10 shadow-premium;
+  }
+
+  .btn-primary {
+    @apply bg-brand-primary text-white px-8 py-3.5 rounded-full font-bold transition-all duration-300 hover:scale-105 hover:bg-brand-accent shadow-xl hover:shadow-brand-primary/20;
+  }
+
+  .card-hover {
+    @apply transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:border-brand-primary/30;
+  }
+}
+
+/* Custom Scrollbar - Dark */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  @apply bg-slate-950;
+}
+::-webkit-scrollbar-thumb {
+  @apply bg-white/10 rounded-full hover:bg-brand-primary/40 transition-colors;
+}
+
+/* Fix for possible Font Display Utility issue */
+.font-display {
+  font-family: var(--font-display);
+}

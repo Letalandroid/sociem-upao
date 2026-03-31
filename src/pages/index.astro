@@ -7,10 +7,40 @@ import Footer from '@partials/Footer.astro';
 ---
 
 <Layout>
-  <div class="h-screen flex justify-center items-center bg-gradient-to-t from-white to-[#006A07]">
+  <div class="relative min-h-screen flex flex-col items-center justify-center overflow-hidden py-24">
+    <!-- Sophisticated background for Hero - Dark -->
+    <div class="absolute inset-0 -z-10 bg-slate-950">
+      <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-brand-primary/[0.05] to-transparent"></div>
+      <!-- Subtle Mesh Gradients -->
+      <div class="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-brand-primary/10 rounded-full blur-[120px] animate-pulse"></div>
+      <div class="absolute bottom-10 right-10 w-[30%] h-[30%] bg-brand-secondary/5 rounded-full blur-[100px] animate-pulse transition-delay-2000"></div>
+      
+      <!-- Subtle Grain Overlay -->
+      <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-[0.02] pointer-events-none"></div>
+    </div>
+    
+    <!-- Hero Section Content -->
     <HomeCard />
+    
+    <!-- Subtle Scroll Prompt -->
+    <div class="absolute bottom-10 left-1/2 -ms-px -translate-x-1/2 animate-bounce opacity-30 hover:opacity-100 transition-opacity cursor-default hidden md:flex flex-col items-center gap-2">
+      <span class="text-[10px] font-bold uppercase tracking-widest text-brand-primary">Explorar</span>
+      <i class="fas fa-chevron-down text-brand-primary"></i>
+    </div>
   </div>
-  <QuienesSomos />
-  <Cursos />
+
+  <div class="space-y-0 relative">
+    <!-- Section divider -->
+    <div class="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-white/5 to-transparent"></div>
+    
+    <div class="bg-slate-950/50">
+      <QuienesSomos />
+    </div>
+    
+    <div class="bg-slate-950/80">
+      <Cursos />
+    </div>
+  </div>
+  
   <Footer />
 </Layout>
